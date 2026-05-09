@@ -9,3 +9,7 @@ __pycache__/
 .pytest_cache/
 .venv
 filepathOrganizer.py
+
+xray_model.h5
+xray_vgg16.h5
+best_model.h5
