@@ -1,5 +1,6 @@
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.applications.vgg16 import preprocess_input
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, classification_report
@@ -9,11 +10,11 @@ model = load_model('best_model.h5')
 
 test_dir = r"D:\ProjectsD\Odev7\xray-env\datasets\parts_test"
 
-test_datagen = ImageDataGenerator(rescale=1./255)
+test_datagen = ImageDataGenerator(preprocessing_function=preprocess_input)
 test_gen = test_datagen.flow_from_directory(
     test_dir,
-    target_size=(128, 128),
-    batch_size=32,
+    target_size=(224, 224),
+    batch_size=16,
     class_mode='categorical',
     color_mode='rgb',
     shuffle=False
@@ -34,9 +35,9 @@ classes = list(test_gen.class_indices.keys())
 cm = confusion_matrix(y_true, y_pred)
 
 plt.figure(figsize=(8, 6))
-sns.heatmap(cm, annot=True, fmt='d', 
-            xticklabels=classes, 
-            yticklabels=classes, 
+sns.heatmap(cm, annot=True, fmt='d',
+            xticklabels=classes,
+            yticklabels=classes,
             cmap='Blues')
 plt.title('Confusion Matrix')
 plt.ylabel('Gerçek')

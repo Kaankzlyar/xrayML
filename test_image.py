@@ -1,5 +1,6 @@
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
+from tensorflow.keras.applications.vgg16 import preprocess_input
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -10,12 +11,13 @@ model = load_model('best_model.h5')
 classes = ['bilek', 'dirsek', 'el', 'omuz']
 
 # --- TEST ETMEK İSTEDİĞİN GÖRÜNTÜ ---
-image_path = r"D:\ProjectsD\Odev7\xray-env\datasets\parts_test\bilek\study1_negative_image1.png"  
+image_path = r"D:\ProjectsD\Odev7\xray-env\datasets\parts_test\bilek\study1_negative_image1.png"
 
 # --- GÖRÜNTÜYÜ HAZIRLA ---
-image = load_img(image_path, target_size=(128, 128), color_mode="rgb")
-image_array = img_to_array(image) / 255.0
+image = load_img(image_path, target_size=(224, 224), color_mode="rgb")
+image_array = img_to_array(image)
 image_array = np.expand_dims(image_array, axis=0)
+image_array = preprocess_input(image_array)
 
 # --- TAHMİN YAP ---
 predictions = model.predict(image_array)
