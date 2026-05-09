@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # --- MODELİ YÜKLE ---
-model = load_model('xray_model.h5')
+model = load_model('best_model.h5')
 
 # --- SINIF İSİMLERİ ---
 classes = ['bilek', 'dirsek', 'el', 'omuz']
@@ -13,7 +13,7 @@ classes = ['bilek', 'dirsek', 'el', 'omuz']
 image_path = r"D:\ProjectsD\Odev7\xray-env\datasets\parts_test\bilek\study1_negative_image1.png"  
 
 # --- GÖRÜNTÜYÜ HAZIRLA ---
-image = load_img(image_path, target_size=(128, 128), color_mode="grayscale") 
+image = load_img(image_path, target_size=(128, 128), color_mode="rgb")
 image_array = img_to_array(image) / 255.0
 image_array = np.expand_dims(image_array, axis=0)
 

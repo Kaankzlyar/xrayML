@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 
-model = load_model('xray_model.h5')
+model = load_model('best_model.h5')
 
 test_dir = r"D:\ProjectsD\Odev7\xray-env\datasets\parts_test"
 
